@@ -12,12 +12,10 @@ import com.algaworks.algamoney.api.event.RecursoCriadoEvent;
 
 @Component
 public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoEvent> {
-
 	@Override
-	public void onApplicationEvent(RecursoCriadoEvent resursoCriadoEvent) {
-
-		HttpServletResponse response = resursoCriadoEvent.getResponse();
-		Long codigo = resursoCriadoEvent.getCodigo();
+	public void onApplicationEvent(RecursoCriadoEvent recursoCriadoEvent) {
+		HttpServletResponse response = recursoCriadoEvent.getResponse();
+		Long codigo = recursoCriadoEvent.getCodigo();
 
 		adicionarHeaderLocation(response, codigo);
 	}
@@ -26,5 +24,4 @@ public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoE
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(codigo).toUri();
 		response.setHeader("Location", uri.toASCIIString());
 	}
-
 }
